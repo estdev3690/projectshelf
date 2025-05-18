@@ -3,13 +3,12 @@ import cors from "cors";
 import userRouter from "./routes/user.routes.js";
 
 const app = express();
-
-// Configure CORS
 app.use(cors({
-    origin: "http://localhost:3000",
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
-    credentials: true
+  origin: [
+    'http://localhost:3000',
+    'https://projectshelf-psi.vercel.app'
+  ],
+  credentials: true
 }));
 
 // Configure express to handle JSON and form data
