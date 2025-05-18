@@ -1,0 +1,25 @@
+/* Reset and base styles */
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap');
+
+
+
+
+.no-portfolios {
+  text-align: center;
+  padding: 2rem;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  border-radius: 8px;
+  margin-top: 1rem;
+  font-family: 'Rajdhani', sans-serif;
+}
+
+.no-portfolios p {
+  margin-bottom: 1.5rem;
+  font-size: 1.1rem;
+  color: #6c757d;
+  font-family: 'Rajdhani', sans-serif;
+}
+.demo-portfolios {
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  font-family: 'Rajdhani', sans-serif;
+}

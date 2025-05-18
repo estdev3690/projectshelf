@@ -1,0 +1,149 @@
+/* Base Styles */
+.modern-container {
+  font-family: 'Segoe UI', sans-serif;
+  padding: 0;
+  margin: 0;
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  overflow-x: hidden;
+}
+
+/* Template Variations */
+.modern-container.template1 {
+  background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+  color: white;
+}
+
+/* ... other template variations remain the same ... */
+
+/* Hero Section */
+.hero-section {
+  display: grid;
+  place-items: center;
+  padding: 2rem;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+.hero-content {
+  display: grid;
+  gap: 1.5rem;
+  justify-items: center;
+  max-width: min(90%, 800px);
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+/* Add these styles to your existing CSS */
+
+.profile-img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border: 4px solid white;
+  box-shadow: 0 0 20px #00f0ff;
+  object-fit: cover;
+  object-position: center;
+  display: none;
+}
+
+.profile-img[src]:not([src=""]) {
+  display: block;
+}
+
+.project-header {
+  height: 150px;
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+}
+
+.project-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Projects Section */
+.projects-section {
+  padding: 3rem 1rem;
+  display: grid;
+  gap: 2rem;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+  gap: 2rem;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.project-card {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  min-height: 300px;
+}
+
+.project-header {
+  height: 150px;
+  width: 100%;
+}
+
+/* Skills Section */
+.skills-section {
+  display: grid;
+  gap: 1.5rem;
+  padding: 2rem 1rem;
+}
+
+.skills-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 1rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Contact Section */
+.contact-section {
+  display: grid;
+  gap: 1.5rem;
+  padding: 2rem 1rem;
+}
+
+.contact-box {
+  display: grid;
+  gap: 1rem;
+  padding: 1.5rem;
+  width: min(90%, 500px);
+  margin: 0 auto;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .hero-name {
+    font-size: clamp(1.5rem, 8vw, 2.5rem);
+  }
+  
+  .hero-title {
+    font-size: clamp(1rem, 4vw, 1.5rem);
+  }
+  
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .profile-img {
+    width: 120px;
+    height: 120px;
+  }
+  
+  .skills-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
