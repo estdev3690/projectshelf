@@ -15,7 +15,7 @@ connectDB()
     });
 })
 .catch((err) => {
-    console.log('mongo db connection error', err);
+    console.log('mongo db connection error..', err);
 });
 
 app.use('/api', healthRouter);
