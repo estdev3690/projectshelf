@@ -22,7 +22,7 @@ const DemoPortfolios = () => {
   const [portfolios, setPortfolios] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const backendUrl = process.env.REACT_APP_API_URL || 'http://localhost:7000'; // Changed from 8000 to 7000
+  const backendUrl = process.env.REACT_APP_API_URL || 'https://projectshelf-vvwo.onrender.com'; // Changed from 8000 to 7000
 
   useEffect(() => {
     const fetchPortfolios = async () => {

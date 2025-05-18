@@ -14,7 +14,7 @@ export const AuthProvider = ({ children }) => {
   
       if (token) {
         try {
-          const response = await axios.get('http://localhost:8000/api/v1/users/current-user', {
+          const response = await axios.get('https://projectshelf-vvwo.onrender.com/api/v1/users/current-user', {
             headers: {
               Authorization: `Bearer ${token}`,
               'Content-Type': 'application/json'
@@ -56,7 +56,7 @@ export const AuthProvider = ({ children }) => {
       }
   
       try {
-        const response = await axios.get('http://localhost:8000/api/v1/users/current-user', {
+        const response = await axios.get('https://projectshelf-vvwo.onrender.com/api/v1/users/current-user', {
           headers: {
             Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json'
@@ -88,7 +88,7 @@ export const AuthProvider = ({ children }) => {
     try {
       setLoading(true);
       const response = await axios.post(
-        'http://localhost:8000/api/v1/users/register',
+        'https://projectshelf-vvwo.onrender.com/api/v1/users/register',
         userData,
         {
           headers: {
@@ -114,7 +114,7 @@ export const AuthProvider = ({ children }) => {
     try {
       setLoading(true);
       const response = await axios.post(
-        'http://localhost:8000/api/v1/users/login', 
+        'https://projectshelf-vvwo.onrender.com/api/v1/users/login', 
         credentials,
         {
           headers: { 'Content-Type': 'application/json' }

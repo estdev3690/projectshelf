@@ -19,7 +19,7 @@ const PublicPortfolio = () => {
   const { username } = useParams();
   const [portfolio, setPortfolio] = useState(null);
   const [error, setError] = useState(null);
-  const backendUrl = 'http://localhost:8000';
+  const backendUrl = 'https://projectshelf-vvwo.onrender.com';
 
   useEffect(() => {
     const fetchData = async () => {

@@ -13,7 +13,7 @@ const LandingPage = () => {
   const navigate = useNavigate();
   const { user, logout, loading } = useAuth();
   const [userPortfolios, setUserPortfolios] = useState([]);
-  const backendUrl = process.env.REACT_APP_API_URL || 'http://localhost:7000';
+  const backendUrl = process.env.REACT_APP_API_URL || 'https://projectshelf-vvwo.onrender.com';
 
   useEffect(() => {
     const fetchPortfolios = async () => {

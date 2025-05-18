@@ -180,7 +180,7 @@ const ModernTemplatePreview = ({ formData }) => {
 };
 const CreateCaseStudy = () => {
   // Change this line (around line 40 in your file)
-  const backendUrl = process.env.REACT_APP_API_URL || 'http://localhost:7000'; // Changed from 8000 to 7000
+  const backendUrl = process.env.REACT_APP_API_URL || 'https://projectshelf-vvwo.onrender.com'; // Changed from 8000 to 7000
   const navigate = useNavigate();
   const [activeStep, setActiveStep] = useState(0);
   const [showPreview, setShowPreview] = useState(false);
