@@ -14,10 +14,22 @@ const Register = () => {
     password: ''
   });
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+  const [passwordError, setPasswordError] = useState('');
 
+    const handleChange = (e) => {
+      if (e.target.name === 'password') {
+        const value = e.target.value;
+        if (/[^a-zA-Z]/.test(value)) {
+          setPasswordError('Password must contain only letters (a-z, A-Z)');
+        } else {
+          setPasswordError('');
+        }
+        setFormData({ ...formData, password: value.replace(/[^a-zA-Z]/g, '') });
+      } else {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+      }
+    };
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     setCountdown(20);
@@ -91,19 +103,33 @@ const Register = () => {
               required
             />
           </div>
-          <div className="form-group">
-            <label htmlFor="password">Password</label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              placeholder="Create a password"
-              value={formData.password}
-              onChange={handleChange}
-              required
-              autoComplete="new-password"
-            />
-          </div>
+          
+            <div className="form-group">
+              <label htmlFor="password">Password</label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Create a password (letters only)"
+                value={formData.password}
+                onChange={handleChange}
+                required
+                autoComplete="new-password"
+              />
+              {passwordError && (
+                <div 
+                  className="error-message" 
+                  style={{ 
+                    color: 'red', 
+                    fontSize: '0.8rem', 
+                    marginTop: '5px',
+                    fontStyle: 'italic'
+                  }}
+                >
+                  {passwordError}
+                </div>
+              )}
+            </div>
        
  
           <button type="submit" className="btn btn-primary" disabled={loading}>
