@@ -99,8 +99,8 @@ const Register = () => {
             />
           </div>
           <button type="submit" className="btn btn-primary" disabled={loading}>
-  {loading ? `Creating Account... ${countdown > 0 ? `(${countdown}s)` : ''}` : 'Create Account'}
-</button>
+            {loading ? `Creating Account... ${countdown > 0 ? `(${countdown}s)` : ''}` : 'Create Account'}
+          </button>
         </form>
       </div>
     </div>

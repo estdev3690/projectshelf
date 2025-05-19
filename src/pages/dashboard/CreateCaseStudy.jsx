@@ -243,8 +243,8 @@ const CreateCaseStudy = () => {
   };
 
   // Add these near the top of your file with other imports
-  const CLOUDINARY_CLOUD_NAME = process.env.REACT_APP_CLOUDINARY_CLOUD_NAME;
-  const CLOUDINARY_UPLOAD_PRESET = process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET;
+  const CLOUDINARY_CLOUD_NAME = dyznk0c2q;
+  const CLOUDINARY_UPLOAD_PRESET = portfolio_uploads;
 
   const handleFileUpload = async (e) => {
     const files = Array.from(e.target.files);
