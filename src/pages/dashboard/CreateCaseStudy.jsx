@@ -256,13 +256,14 @@ const CreateCaseStudy = () => {
       
       const formData = new FormData();
       formData.append('file', file);
-      formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
+      formData.append('upload_preset', 'portfolio_uploads'); //
 
       try {
-        const response = await fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`, {
+        const response = await fetch(`https://api.cloudinary.com/v1_1/dyznk0c2q/image/upload`, {
           method: 'POST',
           body: formData,
         });
+
 
         const data = await response.json();
         console.log('Cloudinary URL:', data.secure_url);
