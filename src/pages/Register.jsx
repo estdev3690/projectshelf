@@ -53,13 +53,14 @@ const Register = () => {
       <div className="auth-card">
         <h2>Create Account</h2>
         {error && <div className="error-message">{error}</div>}
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} autoComplete="off">
           <div className="form-group">
             <label htmlFor="name">Full Name</label>
             <input
               type="text"
               id="name"
               name="name"
+              placeholder="Enter your full name"
               value={formData.name}
               onChange={handleChange}
               required
@@ -71,9 +72,11 @@ const Register = () => {
               type="text"
               id="username"
               name="username"
+              placeholder="Choose a username"
               value={formData.username}
               onChange={handleChange}
               required
+              autoComplete="off"
             />
           </div>
           <div className="form-group">
@@ -82,6 +85,7 @@ const Register = () => {
               type="email"
               id="email"
               name="email"
+              placeholder="Enter your email"
               value={formData.email}
               onChange={handleChange}
               required
@@ -93,11 +97,15 @@ const Register = () => {
               type="password"
               id="password"
               name="password"
+              placeholder="Create a password"
               value={formData.password}
               onChange={handleChange}
               required
+              autoComplete="new-password"
             />
           </div>
+       
+ 
           <button type="submit" className="btn btn-primary" disabled={loading}>
             {loading ? `Creating Account... ${countdown > 0 ? `(${countdown}s)` : ''}` : 'Create Account'}
           </button>

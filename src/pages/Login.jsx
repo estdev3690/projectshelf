@@ -52,16 +52,18 @@ const Login = () => {
       <div className="auth-card">
         <h2>Login</h2>
         {error && <div className="error-message">{error}</div>}
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} autoComplete="off">
           <div className="form-group">
             <label htmlFor="emailOrUsername">Email or Username</label>
             <input
               type="text"
               id="emailOrUsername"
               name="emailOrUsername"
+              placeholder="Enter your email or username"
               value={formData.emailOrUsername}
               onChange={handleChange}
               required
+              autoComplete="off"
             />
           </div>
           <div className="form-group">
@@ -70,9 +72,11 @@ const Login = () => {
               type="password"
               id="password"
               name="password"
+              placeholder="Enter your password"
               value={formData.password}
               onChange={handleChange}
               required
+              autoComplete="new-password"
             />
           </div>
           <button type="submit" className="btn btn-primary" disabled={loading}>
