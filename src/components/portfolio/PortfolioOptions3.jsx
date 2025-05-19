@@ -20,6 +20,7 @@ const HeroCard = ({ formData }) => {
       }}
     >
       {/* Left Section - Text */}
+     
       <Box sx={{ maxWidth: 500 }}>
         <Typography variant="h3" sx={{ fontWeight: 'bold' }}>
           {formData.name || 'Your Name Here'}
@@ -48,18 +49,20 @@ const HeroCard = ({ formData }) => {
       </Box>
 
       {/* Right Section - Profile Image */}
-      {formData.profileImage && (
-        <Avatar
-          src={URL.createObjectURL(formData.profileImage)}
-          alt="Profile"
-          sx={{
-            width: 200,
-            height: 200,
-            border: '4px solid #444',
-            mt: { xs: 4, md: 0 },
-          }}
-        />
-      )}
+      <Avatar
+            src={formData.profileImage || ''}
+            alt={formData.name}
+            sx={{ 
+              width: 120, 
+              height: 120, 
+              mx: 'auto', 
+              mb: 2, 
+              border: '3px solid #64ffda',
+              bgcolor: formData.profileImage ? 'transparent' : '#64ffda'
+            }}
+          >
+            {!formData.profileImage && formData.name?.charAt(0)}
+          </Avatar>
     </Box>
   );
 };

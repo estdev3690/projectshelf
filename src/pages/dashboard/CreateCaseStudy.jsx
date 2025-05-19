@@ -12,7 +12,7 @@ import { useLocation } from 'react-router-dom';
 import PortfolioPreview from '../../components/portfolio/PortfolioPreview';
 import PortfolioPreviews from '../../components/portfolio/PortfolioPreviews';
 import Preview1 from '../../components/OnlyPreviews/ModernTemplate'
-
+import { Snackbar, Alert } from '@mui/material';
 const steps = [
   'Personal Information',
   'Professional Details',
@@ -42,7 +42,7 @@ const VisuallyHiddenInput = styled('input')({
 });
 const ModernTemplatePreview = ({ formData }) => {
   const [currentImage, setCurrentImage] = useState(null);
-
+  const [openSnackbar, setOpenSnackbar] = useState(false);
   useEffect(() => {
     const img = formData.profileImage || localStorage.getItem('portfolioImage');
     setCurrentImage(img || '');
@@ -218,7 +218,7 @@ const CreateCaseStudy = () => {
     // Theme
     theme: 'professional'
   });
-
+  const [openSnackbar, setOpenSnackbar] = useState(false);
   const handleNext = () => {
     if (activeStep === steps.length - 1) {
       navigate('/'); // Navigate to dashboard on final step
@@ -242,16 +242,33 @@ const CreateCaseStudy = () => {
     reader.readAsDataURL(imageFile);
   };
 
-  const handleFileUpload = (e) => {
+  // Add these near the top of your file with other imports
+  const CLOUDINARY_CLOUD_NAME = process.env.REACT_APP_CLOUDINARY_CLOUD_NAME;
+  const CLOUDINARY_UPLOAD_PRESET = process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET;
+
+  const handleFileUpload = async (e) => {
     const files = Array.from(e.target.files);
     if (activeStep === 0) {
       const file = files[0];
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        localStorage.setItem('portfolioImage', e.target.result);
-        setFormData({ ...formData, profileImage: e.target.result });
-      };
-      reader.readAsDataURL(file);
+      
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
+
+      try {
+        const response = await fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`, {
+          method: 'POST',
+          body: formData,
+        });
+
+        const data = await response.json();
+        console.log('Cloudinary URL:', data.secure_url);
+
+        localStorage.setItem('portfolioImage', data.secure_url);
+        setFormData(prevData => ({ ...prevData, profileImage: data.secure_url }));
+      } catch (error) {
+        console.error('Error uploading to Cloudinary:', error);
+      }
     } else {
       setFormData({ ...formData, media: [...formData.media, ...files] });
     }
@@ -318,13 +335,11 @@ const CreateCaseStudy = () => {
     const handleSubmit = async () => {
       try {
         if (!formData.username || !formData.name) {
-          // setValidationError('Username and name are required');
           return;
         }
-        // setValidationError('');
 
         const submissionData = {
-          username: formData.username, // Add this
+          username: formData.username,
           name: formData.name,
           email: formData.email,
           phone: formData.phone,
@@ -341,21 +356,24 @@ const CreateCaseStudy = () => {
           githubUrl: formData.githubUrl,
           skills: formData.skills,
           theme: formData.theme,
-          selectedLayout: formData.selectedLayout
+          selectedLayout: formData.selectedLayout,
+          profileImage: formData.profileImage || localStorage.getItem('portfolioImage') // Add this line
         };
 
         const response = await axios.post(`${backendUrl}/api/portfolio`, submissionData);
         console.log('Save response:', response.data);
 
         if (response.data.success) {
-          navigate('/');
+          setOpenSnackbar(true);
+          setTimeout(() => {
+            navigate('/');
+          }, 2000);
+          
         } else {
           console.error('Save failed:', response.data.message);
-          // Show error to user
         }
       } catch (error) {
         console.error('Save error:', error.response?.data || error.message);
-        // Show detailed error to user
       }
     };
 
@@ -714,6 +732,20 @@ const CreateCaseStudy = () => {
                 Submit Portfolio
               </Button>
             )}
+             <Snackbar
+      open={openSnackbar}
+      autoHideDuration={2000}
+      onClose={() => setOpenSnackbar(false)}
+      anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+    >
+      <Alert 
+        onClose={() => setOpenSnackbar(false)} 
+        severity="success" 
+        sx={{ width: '100%' }}
+      >
+        Portfolio saved successfully!
+      </Alert>
+    </Snackbar>
           </Paper>
         );
 
@@ -742,6 +774,7 @@ const CreateCaseStudy = () => {
         <Typography variant="h4" gutterBottom sx={{ fontWeight: 'bold' }}>
           Create Your Professional Portfolio
         </Typography>
+        
         {selectedTemplate && (
           <Typography variant="subtitle1" color="text.secondary">
             Selected Template: {selectedTemplate.name}

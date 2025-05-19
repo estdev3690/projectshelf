@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box, Typography, Avatar, Stack, Chip } from '@mui/material';
 
+
 const ProfileCard = ({ formData }) => {
   const categories = ['Resume', 'Developer', 'Biography', 'Personal'];
 
@@ -18,19 +19,20 @@ const ProfileCard = ({ formData }) => {
       }}
     >
       {/* Profile Image */}
-      {formData.profileImage && (
-        <Avatar
-          src={URL.createObjectURL(formData.profileImage)}
-          alt={formData.name}
-          sx={{
-            width: 160,
-            height: 160,
-            margin: 'auto',
-            mb: 3,
-            border: '4px solid #eee',
-          }}
-        />
-      )}
+      <Avatar
+            src={formData.profileImage || ''}
+            alt={formData.name}
+            sx={{ 
+              width: 120, 
+              height: 120, 
+              mx: 'auto', 
+              mb: 2, 
+              border: '3px solid #64ffda',
+              bgcolor: formData.profileImage ? 'transparent' : '#64ffda'
+            }}
+          >
+            {!formData.profileImage && formData.name?.charAt(0)}
+          </Avatar>
 
       {/* Name and Summary */}
       <Typography variant="h4" sx={{ fontWeight: 'bold' }}>

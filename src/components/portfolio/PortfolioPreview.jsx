@@ -42,12 +42,22 @@ const DarkPortfolio = ({ formData }) => {
         }}
       >
         {/* Left - Skills */}
+        
         <Box sx={{ width: 300 }}>
-          <Avatar
-            src={formData.profileImage ? URL.createObjectURL(formData.profileImage) : ''}
-            alt="Profile"
-            sx={{ width: 200, height: 200, mb: 3 }}
-          />
+        <Avatar
+            src={formData.profileImage || ''}
+            alt={formData.name}
+            sx={{ 
+              width: 120, 
+              height: 120, 
+              mx: 'auto', 
+              mb: 2, 
+              border: '3px solid #64ffda',
+              bgcolor: formData.profileImage ? 'transparent' : '#64ffda'
+            }}
+          >
+            {!formData.profileImage && formData.name?.charAt(0)}
+          </Avatar>
           <Typography variant="h6">MY SKILLS</Typography>
           <Typography>React</Typography>
           <LinearProgress variant="determinate" value={90} sx={{ mb: 2 }} />

@@ -5,7 +5,7 @@ import Hero from './Hero';
 import Benefits from '../Benefits';
 import DemoPortfolios from '../DemoPortfolios';
 import axios from 'axios';
-import { Grid, Card, CardContent, Typography, Button } from '@mui/material';
+import { Grid, Card, CardContent, Typography, Button, Avatar } from '@mui/material';
 import { Logout } from '@mui/icons-material'; // Add this import
 import './LandingPage.css'; // Import the CSS file for the
 
@@ -27,14 +27,14 @@ const LandingPage = () => {
         console.error('Error fetching portfolios:', error);
       }
     };
-    
+
     if (user) {
       fetchPortfolios();
     }
   }, [user]);
 
   if (loading) {
-    return <div className="loading-spinner">Loading...</div>;
+    return <div className="loading-spinner">Waiting for the server to start</div>;
   }
 
   // Add this right before the return statement
@@ -46,7 +46,7 @@ const LandingPage = () => {
     <div className="landing-page">
       <nav className="main-nav" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px' }}>
         <div className="logo">ProjectShelf</div>
-        
+
         {loading ? null : user ? (
           <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
             <Typography variant="subtitle1" style={{ marginRight: '1rem' }}>
@@ -101,42 +101,57 @@ const LandingPage = () => {
           <Grid container spacing={3} justifyContent="center">
             {userPortfolios.map((portfolio) => (
               <Grid item xs={12} sm={6} md={4} lg={3} key={portfolio._id}>
-                <Card sx={{ 
-                  height: '100%', 
-                  display: 'flex', 
+                <Card sx={{
+                  height: '100%',
+                  display: 'flex',
                   flexDirection: 'column',
                   minHeight: '300px',
                   boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
-                  background:'linear-gradient(to bottom,rgb(229, 235, 243) 0%,rgb(222, 230, 243))',
+                  background: 'linear-gradient(to bottom,rgb(229, 235, 243) 0%,rgb(222, 230, 243))',
                   transition: 'transform 0.3s',
                   '&:hover': {
                     transform: 'translateY(-5px)',
-                    background:'linear-gradient(to top, #f5f7fa 10%,rgb(214, 227, 247))',
+                    background: 'linear-gradient(to top, #f5f7fa 10%,rgb(214, 227, 247))',
                   }
                 }}>
-                  <CardContent sx={{ 
+                  <CardContent sx={{
                     flexGrow: 1,
                     display: 'flex',
                     flexDirection: 'column',
                     justifyContent: 'space-between'
                   }}>
+                    <Avatar
+                      src={portfolio.profileImage || ''}
+                      alt={portfolio.name}
+                      sx={{
+                        width: '100%',
+                        height: 120,
+                        mx: 'auto',
+                        mb: 2,
+                        border: '1px solidrgb(47, 49, 49)',
+                        bgcolor: portfolio.profileImage ? 'transparent' : '#64ffda',
+                        borderRadius:"1px"
+                      }}
+                    >
+                      {!portfolio.profileImage && portfolio.name?.charAt(0)}
+                    </Avatar>
                     <div>
-                      <Typography gutterBottom variant="h5" component="h2" sx={{fontFamily:'rajdhani,sans-serif', fontWeight: 'bold'}}>
+                      <Typography gutterBottom variant="h5" component="h2" sx={{ fontFamily: 'rajdhani,sans-serif', fontWeight: 'bold' }}>
                         {portfolio.name}
                       </Typography>
-                      <Typography variant="subtitle1" color="text.secondary" sx={{fontFamily:'rajdhani,sans-serif', mb: 2}}>
+                      <Typography variant="subtitle1" color="text.secondary" sx={{ fontFamily: 'rajdhani,sans-serif', mb: 2 }}>
                         {portfolio.jobTitle}
                       </Typography>
-                      <Typography variant="body2" paragraph sx={{fontFamily:'rajdhani,sans-serif'}}>
+                      <Typography variant="body2" paragraph sx={{ fontFamily: 'rajdhani,sans-serif' }}>
                         {portfolio.summary}
                       </Typography>
                     </div>
-                    <Button 
+                    <Button
                       variant="contained"
-                      size="small" 
-                      onClick={() => navigate(`/${portfolio.username}`)} 
+                      size="small"
+                      onClick={() => navigate(`/${portfolio.username}`)}
                       sx={{
-                        fontFamily:'rajdhani,sans-serif',
+                        fontFamily: 'rajdhani,sans-serif',
                         alignSelf: 'flex-start',
                         mt: 2
                       }}

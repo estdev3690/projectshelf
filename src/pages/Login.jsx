@@ -6,6 +6,7 @@ const Login = () => {
   const navigate = useNavigate(); // Initialize useNavigate
   const { login, loading } = useAuth();
   const [error, setError] = useState(null);
+  const [countdown, setCountdown] = useState(0);
   const [formData, setFormData] = useState({
     emailOrUsername: '',
     password: ''
@@ -17,6 +18,16 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setCountdown(20);
+    const countdownInterval = setInterval(() => {
+      setCountdown(prev => {
+        if (prev <= 1) {
+          clearInterval(countdownInterval);
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
     const userData = {
       email: formData.emailOrUsername.includes('@') ? formData.emailOrUsername.trim() : undefined,
       username: !formData.emailOrUsername.includes('@') ? formData.emailOrUsername.trim() : undefined,
@@ -25,10 +36,12 @@ const Login = () => {
     console.log('Sending data:', userData);
     try {
       const response = await login(userData);
+      clearInterval(countdownInterval);
       console.log('Login successful:', response); // Debugging line
       console.log('Navigating to dashboard'); // Debugging line
       navigate('/'); // Redirect to dashboard on success
     } catch (err) {
+      clearInterval(countdownInterval);
       console.error('Login error:', err); // Debugging line
       setError(err.message);
     }
@@ -63,7 +76,7 @@ const Login = () => {
             />
           </div>
           <button type="submit" className="btn btn-primary" disabled={loading}>
-            {loading ? 'Logging In...' : 'Login'}
+            {loading ? `Logging In...${countdown > 0 ? `(${countdown}s)` : ''}` : 'Login'}
           </button>
           <div className="auth-option" style={{ marginTop: '1rem', textAlign: 'center' }}>
             Don't have an account?{' '}

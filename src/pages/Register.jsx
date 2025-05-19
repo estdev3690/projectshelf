@@ -6,6 +6,7 @@ const Register = () => {
   const navigate = useNavigate();
   const { register, loading } = useAuth();
   const [error, setError] = useState(null);
+  const [countdown, setCountdown] = useState(0);
   const [formData, setFormData] = useState({
     name: '',
     username: '',
@@ -19,6 +20,16 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setCountdown(20);
+    const countdownInterval = setInterval(() => {
+      setCountdown(prev => {
+        if (prev <= 1) {
+          clearInterval(countdownInterval);
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
     const userData = {
       fullName: formData.name.trim(),
       email: formData.email.trim(),
@@ -28,9 +39,11 @@ const Register = () => {
     console.log('Sending data:', userData);
     try {
       await register(userData);
+      clearInterval(countdownInterval);
       // Change navigation from dashboard to login
       navigate('/login');
     } catch (err) {
+      clearInterval(countdownInterval);
       setError(err.message);
     }
   };
@@ -86,8 +99,8 @@ const Register = () => {
             />
           </div>
           <button type="submit" className="btn btn-primary" disabled={loading}>
-            {loading ? 'Creating Account...' : 'Create Account'}
-          </button>
+  {loading ? `Creating Account... ${countdown > 0 ? `(${countdown}s)` : ''}` : 'Create Account'}
+</button>
         </form>
       </div>
     </div>

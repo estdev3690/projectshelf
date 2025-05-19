@@ -15,7 +15,7 @@ import {
 import { GitHub, LinkedIn } from '@mui/icons-material';
 import { motion } from 'framer-motion';
 
-const PublicPortfolio = () => {
+const PublicPortfolio = ({formData}) => {
   const { username } = useParams();
   const [portfolio, setPortfolio] = useState(null);
   const [error, setError] = useState(null);

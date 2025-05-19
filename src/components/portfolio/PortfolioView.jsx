@@ -27,7 +27,7 @@ const PortfolioView = () => {
       <Typography variant="h3">{portfolio.name}</Typography>
       <Typography variant="h5">{portfolio.jobTitle}</Typography>
       <Typography>{portfolio.summary}</Typography>
-      {/* Add more portfolio details as needed */}
+
     </Box>
   );
 };
