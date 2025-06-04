@@ -1,70 +1,139 @@
-# Getting Started with Create React App
+# ProjectShelf
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![ProjectShelf Screenshot](public/projectshelfimage.png)
+
+ProjectShelf is a full-stack web application that allows developers and designers to create and manage their professional portfolios. Users can showcase their projects, case studies, and professional experience in a beautifully designed, customizable interface.
+
+## Features
+
+- **User Authentication**
+  - Register and login functionality
+  - Protected dashboard routes
+  - Public portfolio viewing
+
+- **Portfolio Management**
+  - Create and manage case studies
+  - Customize portfolio themes
+  - Update profile settings
+  - Public portfolio sharing with unique URLs
+
+- **Case Study Features**
+  - Detailed project documentation
+  - Image uploads
+  - Project descriptions
+  - Technologies used
+  - Live demo links
+
+## Tech Stack
+
+### Frontend
+- React.js
+- Material-UI (MUI)
+- Framer Motion for animations
+- React Router for navigation
+- Axios for API requests
+- Recharts for data visualization
+
+### Backend
+- Node.js
+- Express.js
+- MongoDB (with Mongoose)
+- JWT for authentication
+
+## Getting Started
+
+### Prerequisites
+- Node.js (v14 or higher)
+- npm or yarn
+- MongoDB instance
+
+### Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone [repository-url]
+   cd projectshelf
+   ```
+
+2. **Install Frontend Dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Install Backend Dependencies**
+   ```bash
+   cd backend
+   npm install
+   ```
+
+4. **Environment Setup**
+   Create `.env` files in both root and backend directories with necessary environment variables.
+
+### Running the Application
+
+1. **Start the Backend Server**
+   ```bash
+   cd backend
+   npm start
+   ```
+
+2. **Start the Frontend Development Server**
+   ```bash
+   # In another terminal, from the root directory
+   npm start
+   ```
+
+The application will be available at [http://localhost:3000](http://localhost:3000)
+
+## Project Structure
+
+```
+projectshelf/
+├── src/                    # Frontend source code
+│   ├── components/         # Reusable React components
+│   ├── pages/             # Page components
+│   ├── context/           # React context providers
+│   ├── services/          # API service integrations
+│   └── utils/             # Utility functions
+├── backend/               # Backend source code
+│   ├── routes/            # API routes
+│   ├── models/            # Database models
+│   └── src/              # Core backend logic
+└── public/               # Static assets
+```
 
 ## Available Scripts
 
-In the project directory, you can run:
+- `npm start` - Runs the frontend development server
+- `npm test` - Runs the test suite
+- `npm run build` - Creates a production build
 
-### `npm start`
+## Usage Guide
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+1. **Registration/Login**
+   - Create a new account or login with existing credentials
+   - Access your personal dashboard
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+2. **Creating Your Portfolio**
+   - Navigate to the dashboard
+   - Add your profile information
+   - Create case studies for your projects
+   - Select and customize your portfolio theme
 
-### `npm test`
+3. **Managing Case Studies**
+   - Add detailed project information
+   - Upload project images
+   - Include technical specifications
+   - Add live demo and repository links
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+4. **Sharing Your Portfolio**
+   - Your portfolio is available at `/:username`
+   - Individual case studies can be accessed at `/:username/project/:slug`
 
-### `npm run build`
+## Contributing
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct and the process for submitting pull requests.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## License
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
